@@ -5,21 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>Крестики нолики</title>
+    <title>Tic tac toe</title>
 </head>
 <body>
     <div class="game">
         <div class="game__container container">
             <div class="game__inner">
-                <div class="game__field" id="f1" data-type="1"></div>
-                <div class="game__field" id="f2" data-type="2"></div>
-                <div class="game__field" id="f3" data-type="3"></div>
-                <div class="game__field" id="f4" data-type="4"></div>
-                <div class="game__field" id="f5" data-type="5"></div>
-                <div class="game__field" id="f6" data-type="6"></div>
-                <div class="game__field" id="f7" data-type="7"></div>
-                <div class="game__field" id="f8" data-type="8"></div>
-                <div class="game__field" id="f9" data-type="9"></div>
+                <div class="game__inner-row" data-row="0">
+                    <div class="game__field" id="f1" data-column="0"></div>
+                    <div class="game__field" id="f2" data-column="1"></div>
+                    <div class="game__field" id="f3" data-column="2"></div>
+                </div>
+                <div class="game__inner-row" data-row="1">
+                    <div class="game__field" id="f4" data-column="0"></div>
+                    <div class="game__field" id="f5" data-column="1"></div>
+                    <div class="game__field" id="f6" data-column="2"></div>
+                </div>
+                <div class="game__inner-row" data-row="2">
+                    <div class="game__field" id="f7" data-column="0"></div>
+                    <div class="game__field" id="f8" data-column="1"></div>
+                    <div class="game__field" id="f9" data-column="2"></div>
+                </div>
+
+
             </div>
             
         </div>
