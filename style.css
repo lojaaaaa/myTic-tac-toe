@@ -14,16 +14,21 @@ body{
     
 }
 .container {
-    max-width: 600px;
-    margin: 0 auto;
+
 }
 .game__inner {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.game__inner-row{
+    display: flex;
 
-    display: grid;
-    grid-template-columns: repeat(3, 200px);
-    grid-template-rows: repeat(3, 200px);
 }
 .game__field {
+    width: 150px;
+    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
