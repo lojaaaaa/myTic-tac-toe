@@ -1,87 +1,74 @@
-function array (fNum, tac, msg){
-    if(fNum > 0 && fNum <= 3){
-        arr[0][fNum - 1] = tac
-    }
-    else if(fNum > 3 && fNum < 6){
-        arr[1][fNum % 3 - 1] = tac
-    }
-    else if(fNum > 6 && fNum < 9){
-        arr[2][fNum % 3 - 1] = tac
-    }
-    else if (fNum == 6){
-        arr[1][2] = tac
-    }
-    else if (fNum == 9){
-        arr[2][2] = tac
+function gameCheck(arr, char){
+
+    let lengthOfArray = arr.length
+    let flag
+    for(let i = 0; i < lengthOfArray; i++){
+        let winRow = true,
+        winColumn = true,
+        winLeftTop = true,
+        winLeftBottom = true;
+
+        for (let j = 0; j < lengthOfArray; j++){
+            if(arr[i][j] !== char || arr[i][j] === '') winRow = false;
+            if(arr[j][i] !== char || arr[j][i] === '') winColumn = false;
+            if(arr[j][j] !== char || arr[j][j] === '') winLeftTop = false;
+            if(arr[lengthOfArray-1-j][j] !== char || arr[lengthOfArray-1-j][j] === '') winLeftBottom = false;
+        }
+
+        if(winRow || winColumn || winLeftTop || winLeftBottom){
+            flag = true;
+            break;
+        }
     }
 
-
-    return array2 (tac, msg)
-
-}
-
-
-function array2 (tac, msg){
-    let result = ''
-    if (arr[0][0]===tac && arr[1][1]===tac && arr[2][2]===tac || arr[0][2]===tac && arr[1][1]===tac && arr[2][0]===tac ){
-        result = `Победа ${msg}`
-    }
-    else if (arr[0][0]===tac && arr[0][1]===tac && arr[0][2]===tac || 
-    arr[1][0]===tac && arr[1][1]===tac && arr[1][1]===tac ||
-    arr[2][0]===tac && arr[2][1]===tac && arr[2][2]===tac){
-        result = `Победа ${msg}`
-    }
-    else if (arr[0][0]===tac && arr[1][0]===tac && arr[2][0]===tac || 
-    arr[0][1]===tac && arr[1][1]===tac && arr[2][1]===tac ||
-    arr[0][2]===tac && arr[1][2]===tac && arr[2][2]==tac){
-        result = `Победа ${msg}`
-    }
-    
-    return result
+    return flag
 
 }
+
 
 
 function main (){
+    const gameFields = document.querySelectorAll('.game__field')
     let outputMessage = ''
     let arr = [
         ['','',''],
         ['','',''],
         ['','',''],
         ];
+    
     let count = 1
 
-    document.addEventListener('click', event =>{
-        const tap = event.target.id
-        const fNum = event.target.dataset.type
+    gameFields.forEach(function(gameField, indexGameField){
+        gameField.addEventListener('click', ()=>{
 
-        if (count % 2 != 0){
-            document.querySelector(`#${tap}`).innerHTML = 'x'
-            outputMessage = array(fNum, 1, '1 игрока')
-            if (outputMessage != ''){
-                console.log(outputMessage)
-                alert(outputMessage)
-                window.location.reload()
+            if (gameField.innerHTML === '' && count % 2 !== 0){
+                gameField.innerHTML = 'x'
+                arr[gameField.parentElement.dataset.row][gameField.dataset.column] = 'x'
+                count++
+                if(gameCheck(arr, 'x')){
+                    alert('Победили крестики')
+                    location.reload()
+                }
             }
-        }
 
-        else if (count % 2 == 0){
-            document.querySelector(`#${tap}`).innerHTML = 'o'
-            outputMessage = array(fNum, 0, '2 игрока')
-            if (outputMessage != ''){
-                console.log(outputMessage)
-                alert(outputMessage)
-                window.location.reload()
+            else if(gameField.innerHTML === '' && count % 2 === 0){
+                gameField.innerHTML = 'o'
+                arr[gameField.parentElement.dataset.row][gameField.dataset.column] = 'o'
+                count++
+                if(gameCheck(arr, 'o')){
+                    alert('Победили нолики')
+                    location.reload()
+                }
             }
-        }
-        count++
-        
-
+            
+            if(count === 10){
+                alert('Ничья')
+                location.reload()
+            }
+        })
     })
 
-    return arr
 }
 
-let arr = main()
 
-console.log(arr)
+main()
